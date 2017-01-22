@@ -7,14 +7,13 @@ require APPPATH . '/App.php';
 App\App::load();
 
 // router en fonction les paramètres de l'url
-if(isset($_GET['url'])){
-    $page = $_GET['url'];
+if(isset($_GET['p'])){
+    $page = $_GET['p'];
 }else{
-    $page = 'default/login';
+    $page = 'default.login';
 }
 
-$page = explode('/', $page);
-
+$page = explode('.', $page);
 $controller = '\App\Controller\\' . ucfirst($page[0]) . 'Controller';
 $action = $page[1];
 

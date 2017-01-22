@@ -4,7 +4,7 @@
 
 L'application a été développée sur un serveur apache. 
 Pour des questions de sécurité il est recommandé de faire pointer le vhost directement sur le dossier `public` de l'application.
-L'activation du mod_rewrite permets aussi d'avoir de plus belles URL.
+
 
 Le dossier `Core` contient les classes réutilisables de l'application.
 Le dossier `App` contient le code propre à l'application.

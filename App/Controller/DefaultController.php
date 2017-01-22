@@ -6,8 +6,12 @@ use App\App;
 class DefaultController extends AppController
 {
 	public function login() {
-		$app = App::getInstance();
-		$db = $app->getDb();
+
+		if (isset($_SESSION['auth'])) {
+			header("Location: /index.php?p=chat.index");
+			die();
+		}
+
 		$this->render('login');
 	}
 }
