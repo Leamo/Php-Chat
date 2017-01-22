@@ -7,6 +7,7 @@ Pour des questions de sécurité il est recommandé de faire pointer le vhost di
 
 
 Le dossier `Core` contient les classes réutilisables de l'application.
+
 Le dossier `App` contient le code propre à l'application.
 
 ## Configuration : 
