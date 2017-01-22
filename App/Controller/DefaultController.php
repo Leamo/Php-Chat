@@ -30,6 +30,7 @@ class DefaultController extends AppController
 				if ($user) {
 					if (password_verify($passwd,$user->getPassword())) {
 						$_SESSION['auth'] = $user->getId();
+						header("Location: /?p=chat.index");
 					} else {
 						$error_login = 'Mot de passe incorrect';
 					}
@@ -38,23 +39,28 @@ class DefaultController extends AppController
 				}
 			}
 
-			if (isset($_POST['subscribe']) 
-			&& null !== $_POST['username'] 
-			&& null !== $_POST['passwd'] 
-			&& null !== $_POST['passwd2']) {
-				if ($_POST['passwd'] == $_POST['passwd2']) {
-					$user = new User([
-						"name" => $_POST['username'],
-						"password" => password_hash($_POST['passwd'],PASSWORD_BCRYPT)
-					]);
-					$userManager->add($user);
-					$_SESSION['auth'] = $user->getId();
+			if (isset($_POST['subscribe'])) {
+				if (null !== $_POST['username'] 
+				&& null !== $_POST['passwd'] 
+				&& null !== $_POST['passwd2']) {
+					if ($_POST['passwd'] == $_POST['passwd2']) {
+						$user = new User([
+							"name" => $_POST['username'],
+							"password" => password_hash($_POST['passwd'],PASSWORD_BCRYPT)
+						]);
+						$userManager->add($user);
+						$id = $app->getDb()->lastInsertId();
+						$user->setId($id);
+						$_SESSION['auth'] = $user->getId();
+						header("Location: /?p=chat.index");
+					} else {
+						$error_subscribe = 'Les mots de passe doivent être identiques';
+					}
 				} else {
-					$error_subscribe = 'Les mots de passe doivent être identiques';
+					$error_subscribe = 'Veuillez remplir tous les champs';
 				}
-			} else {
-				$error_subscribe = 'Veuillez remplir tous les champs';
 			}
+			
 		}
 
 		$this->render('login', compact('error_login','error_subscribe'));
