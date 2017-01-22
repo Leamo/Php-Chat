@@ -8,7 +8,6 @@ class Connexion extends Entity
 	private $_id;
 	private $_userId;
 	private $_datetime;
-	private $_action;
 
 	public function getId()
     {
@@ -22,12 +21,12 @@ class Connexion extends Entity
         return $this;
     }
 
-    public function getUserId()
+    public function getUserid()
     {
         return $this->_userId;
     }
 
-    public function setUserId($userId)
+    public function setUserid($userId)
     {
         $this->_userId = $userId;
 
@@ -42,18 +41,6 @@ class Connexion extends Entity
     public function setDatetime($datetime)
     {
         $this->_datetime = $datetime;
-
-        return $this;
-    }
-
-    public function getAction()
-    {
-        return $this->_action;
-    }
-
-    public function setAction($action)
-    {
-        $this->_action = $action;
 
         return $this;
     }

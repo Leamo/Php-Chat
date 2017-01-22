@@ -17,7 +17,7 @@ class MessageManager {
   	{
   		$statement = 'INSERT INTO message(content, datetime, user_id) VALUES(?, ?, ?)';
   		$date = (new \DateTime())->format('Y-m-d H:i:s');
-  		$this->db->prepare($statement,[$message->getContent(), $date, $message->getUserId()], true);
+  		$this->db->prepare($statement,[$message->getContent(), $date, $message->getUserid()], true);
   	}
 
 

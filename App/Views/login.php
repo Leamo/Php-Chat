@@ -4,7 +4,7 @@
 <?php endif ?>
 <form method="post">
 	<input type="text" name="username" required="true">
-	<input type="text" name="passwd" required="true">
+	<input type="password" name="passwd" required="true">
 	<input type="submit" name="login" value="Connexion">
 </form>
 

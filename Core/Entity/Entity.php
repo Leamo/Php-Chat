@@ -11,7 +11,7 @@ class Entity {
 	{
   		foreach ($donnees as $key => $value) {
 		    // On récupère le nom du setter correspondant à l'attribut.
-		    $method = 'set'.ucfirst($key);
+		    $method = 'set'.ucfirst(str_replace('_', '', $key));
         
 		    // Si le setter correspondant existe.
 		    if (method_exists($this, $method)) {

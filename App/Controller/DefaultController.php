@@ -43,16 +43,30 @@ class DefaultController extends AppController
 				if (null !== $_POST['username'] 
 				&& null !== $_POST['passwd'] 
 				&& null !== $_POST['passwd2']) {
+					
 					if ($_POST['passwd'] == $_POST['passwd2']) {
+
 						$user = new User([
 							"name" => $_POST['username'],
 							"password" => password_hash($_POST['passwd'],PASSWORD_BCRYPT)
 						]);
-						$userManager->add($user);
-						$id = $app->getDb()->lastInsertId();
-						$user->setId($id);
-						$_SESSION['auth'] = $user->getId();
-						header("Location: /?p=chat.index");
+
+						$users = $userManager->findAll();
+						foreach ($users as $existingUser) {
+							if ($existingUser->getName() == $user->getName()) {
+								$error_subscribe = 'Pseudo déjà existant';
+								$alreadyExist = true;
+							}
+						}
+
+						if (!isset($alreadyExist)) {
+							$userManager->add($user);
+							$id = $app->getDb()->lastInsertId();
+							$user->setId($id);
+							$_SESSION['auth'] = $user->getId();
+							header("Location: /?p=chat.index");
+						}
+						
 					} else {
 						$error_subscribe = 'Les mots de passe doivent être identiques';
 					}

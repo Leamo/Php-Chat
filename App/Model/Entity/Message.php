@@ -23,12 +23,12 @@ class Message extends Entity
         return $this;
     }
 
-    public function getUserId()
+    public function getUserid()
     {
         return $this->_userId;
     }
 
-    public function setUserId($userId)
+    public function setUserid($userId)
     {
         $this->_userId = $userId;
 
